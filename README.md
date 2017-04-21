@@ -56,4 +56,21 @@ e = &c; //ILLEGAL, c is const
 
 ```
 
+# Automatic Deferencing
+If you try to index a reference, or call a method on a reference, Rust will automatically derefence as many times a necessary.  
+```
+ let v = vec![1,2,3];
+ let rv = &v;
+ let rrv = &rv;
+ let rrrv = &rrv;
+ let one = rrv[0];  //C++ would reauire (***rrrv )[0]
+ let three = rrrv.len(); //C++ would require (***rrrv).len();
+ ```
+ If you're assigning to a reference, you have to deref yourself.  
+ ```
+ let mut a = 5;
+ let rra = &mut &mut a;
+ //rra = 6; //ILLEGAL, must derefence manually
+ **rra = 6;
+ ```
 
