@@ -73,4 +73,18 @@ If you try to index a reference, or call a method on a reference, Rust will auto
  //rra = 6; //ILLEGAL, must derefence manually
  **rra = 6;
  ```
+ 
+ # Box and Rc
+ `Box<T>` is equiavalent to `std::unique_ptr<T>`, and `Rc<T>` is equivalent to a *thead unsafe* version of `std::shared_ptr<const T>`.  If you need a mutable shared reference, check out Cell and RefCell.
+ ```
+ let mut b = Box::new(5);
+*b = 6;
+use std::rc::Rc;
+let mut rc = Rc::new(10);
+//*rc = 11; //ILLEGAL, the int is const, even though rc itself is mutable.  
+let other = rc.clone(); //other is a Rc<int> pointing to the same int as rc
+let weak = Rc::downgrade(&rc); //weak is like a std::weak_pointer<const T>, and won't increment the reference count.  
+                               //Useful for breaking ownership cycles
+ ```
+ 
 
