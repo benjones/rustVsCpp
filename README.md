@@ -16,7 +16,8 @@ d = &b; //OK, d is mutable, so it can point somewhere else
 *d = 4; //ILLEGAL, cannot change the referrant
 
 //C++ equivalent
-int a = 3, b = 5;
+const int a = 3;
+const int b = 5;
 const int* const c = &a;
 *c = 4; //ILLEGAL, cannot change the referrant
 c = &b; //ILLEGAL, c is const as well, so it can't be reseated
@@ -34,10 +35,25 @@ let mut b : i32 = 5;
 let c : i32 = 7;
 let d : &mut i32 = &mut a; //d points to a now
 *d = 10; //OK, change a
-d = &mut b; //ILLEGAL, d is not mutable, so it can't be reseated
+//d = &mut b; //ILLEGAL, d is not mutable, so it can't be reseated
 let mut e : &mut i32;
-e = &a; //illegal ince d already has a mutable reference to a
+//e = &a; //illegal ince d already has a mutable reference to a
 e = &b; //fine, no one has a reference to b;
-e = &c; //Illegal, c is not mutable
+//e = &c; //Illegal, c is not mutable
+
+//C++
+int a = 3, b = 5;
+const int c = 7;
+int* const d = &a; //d can't change, but it points to somethign that can
+*d = 10; //OK, d didn't change
+//d = &b; //ILLEGAL, changes d itself
+int* e; // e can change, as can the thing it points to
+//e = &a, legal in c++ since there's no borrow checker
+e = &b;  //OK, e points to b;
+e = &c; //ILLEGAL, c is const
+
+
+
+```
 
 
