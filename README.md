@@ -2,7 +2,7 @@
 A comparison of Rust and Cpp reference/pointer types.  I'm an experienced C++ programmer but Rust N00b, so pull requests are welcome.
 
 # rust `&T`
-This is basically equivalent to a C++ `const T*` type, a pointer that may be reseated (made to point somewhere else), if the variable storing it is mutable.  However, it may not modify the object on the other end of the pointer.  
+This is basically equivalent to a C++ `const T*` type, a pointer that may be reseated (made to point somewhere else), if the variable storing it is mutable.  However, it may not modify the object on the other end of the pointer.   It must always point to a valid T, and cannot point to null.
 ## Example
 ```
 //RUST, types annotated for clarity
