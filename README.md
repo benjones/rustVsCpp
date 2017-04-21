@@ -1,4 +1,4 @@
-# rustVsCpp
+# Rust vs Cpp
 A comparison of Rust and Cpp reference/pointer types.  I'm an experienced C++ programmer but Rust N00b, so pull requests are welcome.
 
 # rust `&T`
