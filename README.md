@@ -3,7 +3,7 @@ A comparison of Rust and Cpp reference/pointer types.  I'm an experienced C++ pr
 
 # rust unsafe pointers: `* mut T` and `* const T`
 
-These are the same as a `T*` and `const T*` from C++.  They work about the same except for automatic deferencing (see below).  They might be null and have no checked ownership semantics.  They are (or at least should be) rare in most user code.
+These are the same as a `T*` and `const T*` from C++.  They work about the same as in C++.  They might be null and have no checked ownership semantics.  They are (or at least should be) rare in most user code.
 
 # rust `&T`
 This is basically equivalent to a C++ `const T*` type, a pointer that may be reseated (made to point somewhere else), if the variable storing it is mutable.  However, it may not modify the object on the other end of the pointer.   It must always point to a valid T, and cannot point to null.  You can think of them as compile-time checked versions of `non_null<const T>` smart pointers.
