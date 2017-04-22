@@ -78,8 +78,8 @@ If you try to index a reference, or call a method on a reference, Rust will auto
  **rra = 6;
  ```
  
- # Box and Rc
- `Box<T>` is equiavalent to `std::unique_ptr<T>`, and `Rc<T>` is equivalent to a *single threaded* version of `std::shared_ptr<const T>`.  They don't use an atomic reference counter, so they are unsafe to share between threads (and the compiler won't let you).  If you need a mutable shared reference, check out Cell and RefCell.
+ # Box, Rc, and Arc
+ `Box<T>` is equiavalent to `std::unique_ptr<T>`, and `Rc<T>` is equivalent to a *single threaded* version of `std::shared_ptr<const T>`.  They don't use an atomic reference counter, so they are unsafe to share between threads (and the compiler won't let you).  `Arc<T>` uses an atomic reference count so it can be shared between threads.  If you need a mutable shared reference, check out Cell and RefCell.
  ```
  let mut b = Box::new(5);
 *b = 6;
