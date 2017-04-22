@@ -1,8 +1,12 @@
-# Rust vs Cpp
+# Rust vs Cpp pointers/references
 A comparison of Rust and Cpp reference/pointer types.  I'm an experienced C++ programmer but Rust N00b, so pull requests are welcome.
 
+# rust unsafe pointers: `* mut T` and `* const T`
+
+These are the same as a `T*` and `const T*` from C++.  They work about the same except for automatic deferencing (see below).  They might be null and have no checked ownership semantics.  They are (or at least should be) rare in most user code.
+
 # rust `&T`
-This is basically equivalent to a C++ `const T*` type, a pointer that may be reseated (made to point somewhere else), if the variable storing it is mutable.  However, it may not modify the object on the other end of the pointer.   It must always point to a valid T, and cannot point to null.
+This is basically equivalent to a C++ `const T*` type, a pointer that may be reseated (made to point somewhere else), if the variable storing it is mutable.  However, it may not modify the object on the other end of the pointer.   It must always point to a valid T, and cannot point to null.  You can think of them as compile-time checked versions of `non_null<const T>` smart pointers.
 ## Example
 ```
 //RUST, types annotated for clarity
@@ -75,7 +79,7 @@ If you try to index a reference, or call a method on a reference, Rust will auto
  ```
  
  # Box and Rc
- `Box<T>` is equiavalent to `std::unique_ptr<T>`, and `Rc<T>` is equivalent to a *thead unsafe* version of `std::shared_ptr<const T>`.  If you need a mutable shared reference, check out Cell and RefCell.
+ `Box<T>` is equiavalent to `std::unique_ptr<T>`, and `Rc<T>` is equivalent to a *single threaded* version of `std::shared_ptr<const T>`.  They don't use an atomic reference counter, so they are unsafe to share between threads (and the compiler won't let you).  If you need a mutable shared reference, check out Cell and RefCell.
  ```
  let mut b = Box::new(5);
 *b = 6;
