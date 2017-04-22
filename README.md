@@ -42,8 +42,9 @@ let d : &mut i32 = &mut a; //d points to a now
 //d = &mut b; //ILLEGAL, d is not mutable, so it can't be reseated
 let mut e : &mut i32;
 //e = &a; //illegal ince d already has a mutable reference to a
-e = &b; //fine, no one has a reference to b;
-//e = &c; //Illegal, c is not mutable
+e = &mut b; //fine, no one has a reference to b;
+//e = &mut c; //Illegal, c is not mutable
+
 
 //C++
 int a = 3, b = 5;
